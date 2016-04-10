@@ -21,8 +21,8 @@ module.exports = class Hapi extends Trailpack {
     const logger = this.app.config.log.logger
 
     if (!config.webpack.options) {
-      logger.warn('trailspack-react: no Webpack "options" are defined.')
-      logger.warn('trailspack-react: Please configure config/webpack.js')
+      logger.warn('trailpack-react: no Webpack "options" are defined.')
+      logger.warn('trailpack-react: Please configure config/webpack.js')
     }
     return Promise.resolve()
   }
@@ -36,15 +36,15 @@ module.exports = class Hapi extends Trailpack {
       this.compiler = webpack(this.app.config.webpack.options, (err, stats) => {
         if (err) return reject(err)
 
-        logger.info('trailspack-react: compiler loaded.')
-        logger.silly('trailspack-react: ', stats.toString())
+        logger.info('trailpack-react: compiler loaded.')
+        logger.silly('trailpack-react: ', stats.toString())
 
         if (process.env.NODE_ENV == 'development') {
-          logger.info('trailspack-react: watching...')
+          logger.info('trailpack-react: watching...')
           this.compiler.watch(_.extend({}, this.app.config.webpack.watchOptions), this.afterBuild.bind(this))
         }
         else {
-          logger.info('trailspack-react: running...')
+          logger.info('trailpack-react: running...')
           this.compiler.run(this.afterBuild.bind(this))
         }
         resolve()
@@ -54,21 +54,15 @@ module.exports = class Hapi extends Trailpack {
 
   afterBuild(err, rawStats) {
     const logger = this.app.config.log.logger
-    if (err) return logger.error('trailspack-react: FATAL ERROR', err)
+    if (err) return logger.error('trailpack-react: FATAL ERROR', err)
 
     const stats = rawStats.toJson()
 
-    logger.debug('trailspack-react: Build Info\n' + rawStats.toString({
+    logger.debug('trailpack-react: Build Info\n' + rawStats.toString({
         colors: true,
         chunks: false
       }))
 
-    if (stats.errors.length > 0) {
-      logger.error('trailspack-react:', stats.errors)
-    }
-    if (stats.warnings.length > 0) {
-      logger.warn('trailspack-react:', stats.warnings)
-    }
   }
 
   constructor(app, config) {
