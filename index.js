@@ -11,7 +11,7 @@ const webpack = require('webpack')
  *
  * Use React in your Trails application
  */
-module.exports = class Hapi extends Trailpack {
+module.exports = class React extends Trailpack {
 
   /**
    * Ensure that config/webpack is valid
