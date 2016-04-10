@@ -3,6 +3,9 @@ const webpack = require('webpack');
 
 module.exports = {
   options: {
+    resolve: {
+      root: path.join(__dirname, '../')
+    },
     entry: [
       './src/index'
     ],
